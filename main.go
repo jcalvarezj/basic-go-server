@@ -8,7 +8,7 @@ func main() {
 	fmt.Println("Server running on port 8080")
 	server := NewServer(":8080")
 
-	APIHandler := server.AddMiddlewares(HandleAPIHome, CheckAuth())
+	APIHandler := server.AddMiddlewares(HandleAPIHome, CheckAuth(), LogStuff())
 
 	server.Handle("/", HandleRoot)
 	server.Handle("/api", APIHandler)
