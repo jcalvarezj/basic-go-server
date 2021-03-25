@@ -21,3 +21,13 @@ func (self *Server) Listen() error {
 	http.Handle("/", self.router)
 	return http.ListenAndServe(self.port, nil)
 }
+
+func (self *Server) AddMiddlewares(baseHandler http.HandlerFunc, middlewares ...Middleware) http.HandlerFunc {
+	encapsulatedHandler := baseHandler
+
+	for _, middleware := range middlewares {
+		encapsulatedHandler = middleware(encapsulatedHandler)
+	}
+
+	return encapsulatedHandler
+}
