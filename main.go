@@ -12,5 +12,6 @@ func main() {
 
 	server.Handle("/", HandleRoot)
 	server.Handle("/api", APIHandler)
+	server.Handle("/api/users", HandleUsersPost)
 	server.Listen()
 }
